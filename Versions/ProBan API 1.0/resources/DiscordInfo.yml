@@ -1,0 +1,27 @@
+#
+# Rajador Developer 🤓
+# 
+# If you like this system, please join my discord group: https://discord.gg/wGPW9ZUSw9 🤓👍
+
+# Put your discord webhook url here 🤓👍 exemple: https://discordapp.com/api/webhooks/1234567890/abcdefg
+webhook-url: 'your_webhook'
+
+# WebHook Username
+username: 'Rajador Developer ProBan Plugin'
+# WebHook avatar URL
+avatar-url: 'https://www.pngall.com/wp-content/uploads/2017/05/Alert-Download-PNG.png'
+
+# WebHook Color (You can use red, green, blue, yellow, white, black, and pink 🤓👍)
+color: 'red'
+
+# WebHook Ban Title:
+ban-title: 'Player Banned'
+
+# WebHook Kick Title
+kick-title: 'Player Expelled'
+
+# WebHook Ban Description (You can use {target}, {adm}, {reason}, {line}  🤓👍)
+ban-description: '**Player** `{target}` **was banned by:** `{adm}`{line}Reason: **{reason}**'
+
+# WebHook Kick Description (You can use {target}, {adm}, {reason}, {line}  🤓👍)
+kick-description: '**Player** `{target}` **was expelled by:** `{adm}`{line}Reason: **{reason}**'
