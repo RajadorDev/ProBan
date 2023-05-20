@@ -25,5 +25,3 @@ Advanced punishment plugin, with WebHook Connection Discord
 - Set your webhook: **/pb webhook {webhook_url}**
 - To see the list of bans: **/pb banlist {address/accounts}**
 - To see information about a ban: **/pb seeban {player/address Banned}**
-
-
