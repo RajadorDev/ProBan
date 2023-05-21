@@ -35,6 +35,7 @@ class ProBanCommand extends Command
 			"§8-==(§eProBan§8)==-\n§8> §bTo change the WebHook Address use: §f/{cmd} webhook <URL>\n§8> §bInformation about the plugin: §f/{cmd} about\n§8> §bTo see ban list use: §f/{cmd} banlist <accounts/ips> <page>\n§8>§b Information about an banishment use: §f/{cmd} seeban <player_banned>",
 			['pb']
 		);
+		$this->setPermission('pro-ban.use');
 	}
 	
 	public function execute(CommandSender $p, $label, array $args)
