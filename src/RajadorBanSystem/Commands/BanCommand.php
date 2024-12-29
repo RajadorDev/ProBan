@@ -41,7 +41,7 @@ class BanCommand extends Command
 		$this->setPermission($config['permission']);
 	}
 	
-	public function execute(CommandSender $p, String $label, array $args)
+	public function execute(CommandSender $p, $label, array $args)
 	{
 		if(!$this->testPermission($p))
 		  return false;
