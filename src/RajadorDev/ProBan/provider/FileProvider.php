@@ -25,6 +25,7 @@ use pocketmine\utils\Config;
 use pocketmine\promise\Promise;
 use pocketmine\promise\PromiseResolver;
 use RajadorDev\ProBan\data\PlayerBannedData;
+use RajadorDev\ProBan\utils\SerializableObjectData;
 
 class FileProvider implements DataProvider, JsonSerializable
 {
@@ -91,7 +92,7 @@ class FileProvider implements DataProvider, JsonSerializable
     {
         /** @var PlayerBannedData[] */
         $list = array_map(
-            fn (array $data) : PlayerBannedData => PlayerBannedData::unserialize($data), 
+            fn (array $data) : SerializableObjectData => PlayerBannedData::unserialize($data), 
             $bans
         );
         return $list;
