@@ -49,6 +49,7 @@ class BanCommand extends FormCommand
         {
             $list[$player->getUniqueId()->getBytes()] = $player->getName();
         }
+        /** @var string[] */
         $visualList = $list;
         sort($visualList);
         $form = new CustomForm(
