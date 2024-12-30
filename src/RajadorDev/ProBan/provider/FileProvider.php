@@ -89,10 +89,12 @@ class FileProvider implements DataProvider, JsonSerializable
      */
     public static function unserializeList(array $bans) : array 
     {
-        return array_map(
+        /** @var PlayerBannedData[] */
+        $list = array_map(
             fn (array $data) : PlayerBannedData => PlayerBannedData::unserialize($data), 
             $bans
         );
+        return $list;
     }
 
     public function isBanned(string|Player $input): bool

@@ -27,7 +27,7 @@ interface DataProvider
 {
 
     /** 
-     * @param PlayerBannedData
+     * @param PlayerBannedData $data
      * @return Promise<bool>
      */
     public function save(PlayerBannedData $data) : Promise;
