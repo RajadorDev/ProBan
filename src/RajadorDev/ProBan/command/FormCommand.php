@@ -21,7 +21,6 @@ namespace RajadorDev\ProBan\command;
 
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
-use ProBan\command\ProBanCommand;
 
 abstract class FormCommand extends ProBanCommand
 {

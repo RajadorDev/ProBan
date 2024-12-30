@@ -6,4 +6,11 @@ version: 2.0.0
 author: Rajador
 website: https://github.com/RajadorDev
 discord: rajadortv
+permissions:
+  proban.kick:
+    description: 'Allow players to kick another players.'
+    default: op
+  proban.ban:
+    description: 'Allow players to ban another players.'
+    default: op
 ...

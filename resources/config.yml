@@ -8,5 +8,9 @@ messages:
   prefix: '§l§bPRO§f§eBAN§r§7  '
   player.notfound: '{prefix}§cPlayer §f{name} §cnot found!'
   player.kicked: '{prefix}§cPlayer §f{name} §cwas kicked by §f{by} for: §f{reason}'
-  kicked.screen: '§7You was kicked by §f{by} §7Reason: §f{reason}'
+  kick.screen: '§7You was kicked by §f{by} §7Reason: §f{reason}'
+  kick.usage: '{prefix}To kick some player use: §f/{label} <player: string> <reason: string>'
+  ban.usage: '{prefix}To ban some player: §f/{label} <player: string> <reason: string>'
+  player.banned: '{prefix}§cPlayer §f{name} §cwas banned by §f{by} for: §f{reason}'
+  ban.screen: '§7You are banned by §f{by} §7Reason: §f{reason}'
 ...

@@ -17,7 +17,7 @@ declare (strict_types=1);
  * 
 **/
 
-namespace ProBan\command;
+namespace RajadorDev\ProBan\command;
 
 use pocketmine\Server;
 use pocketmine\plugin\Plugin;
