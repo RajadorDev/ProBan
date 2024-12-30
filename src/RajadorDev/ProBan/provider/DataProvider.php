@@ -38,7 +38,7 @@ interface DataProvider
     public function getAll() : Promise;
 
     /**
-     * @param PlayerBannedData
+     * @param PlayerBannedData $data
      * @return void 
      */
     public function delete(PlayerBannedData $data) : void;
