@@ -19,6 +19,7 @@ declare (strict_types=1);
 
 namespace RajadorDev\ProBan\provider;
 
+use pocketmine\player\Player;
 use pocketmine\promise\Promise;
 use RajadorDev\ProBan\data\PlayerBannedData;
 
@@ -32,12 +33,6 @@ interface DataProvider
     public function save(PlayerBannedData $data) : Promise;
 
     /**
-     * @param string $username
-     * @return Promise<PlayerBannedData | null>
-     */
-    public function fetchBannedByUsername(string $username) : Promise;
-
-    /**
      * @return Promise<PlayerBannedData[]>
      */
     public function getAll() : Promise;
@@ -47,5 +42,18 @@ interface DataProvider
      * @return void 
      */
     public function delete(PlayerBannedData $data) : void;
+
+    /**
+     * @param string | Player $input
+     * @return bool
+     */
+    public function isBanned(string | Player $input) : bool;
+
+    /**
+     * @param string | Player $input
+     * @return PlayerBannedData
+     */
+    public function getBannedData(string|Player $input) : ? PlayerBannedData;
+
 
 }

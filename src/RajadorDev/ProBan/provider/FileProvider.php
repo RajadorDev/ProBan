@@ -20,6 +20,7 @@ declare (strict_types=1);
 namespace RajadorDev\ProBan\provider;
 
 use JsonSerializable;
+use pocketmine\player\Player;
 use pocketmine\utils\Config;
 use pocketmine\promise\Promise;
 use pocketmine\promise\PromiseResolver;
@@ -54,21 +55,6 @@ class FileProvider implements DataProvider, JsonSerializable
         $this->bans[$data->getId()] = $data;
         $this->saveFile();
         return self::promise(true);
-    }
-
-    public function fetchBannedByUsername(string $username): Promise
-    {
-        $username = strtolower($username);
-        $found = null;
-        foreach ($this->bans as $banData)
-        {
-            if (strtolower($username) == $username)
-            {
-                $found = $banData;
-                break;
-            }
-        }
-        return self::promise($found);
     }
 
     public function getAll(): Promise
@@ -107,6 +93,29 @@ class FileProvider implements DataProvider, JsonSerializable
             fn (array $data) : PlayerBannedData => PlayerBannedData::unserialize($data), 
             $bans
         );
+    }
+
+    public function isBanned(string|Player $input): bool
+    {
+        return $this->getBannedData($input) instanceof PlayerBannedData;
+    }
+
+    public function getBannedData(string|Player $input): ?PlayerBannedData
+    {
+        if (isset($this->bans[$uuid = $input instanceof Player ? $input->getUniqueId()->getBytes() : $input]))
+        {
+            return $this->bans[$uuid];
+        } else if (is_string($input)) {
+            $username = strtolower($input);
+            foreach ($this->bans as $banData)
+            {
+                if ($username == strtolower($banData->getUsername()))
+                {
+                    return $banData;
+                }
+            }
+        }
+        return null;
     }
 
 }
