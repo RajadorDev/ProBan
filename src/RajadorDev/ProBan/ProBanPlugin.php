@@ -23,5 +23,7 @@ use pocketmine\plugin\PluginBase;
 
 final class ProBanPlugin extends PluginBase 
 {
+
+    
     
 }

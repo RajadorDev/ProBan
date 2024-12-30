@@ -1,6 +1,9 @@
+---
 name: ProBan
-api: 1.0
-main: RajadorBanSystem\ProBan
-version: 0.1 Beta Tester
+api: 5.0.0
+main: RajadorDev\ProBan\ProBanPlugin
+version: 2.0.0 
 author: Rajador
 website: https://github.com/RajadorDev
+discord: rajadortv
+...
