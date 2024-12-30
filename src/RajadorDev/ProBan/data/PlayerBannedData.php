@@ -41,9 +41,9 @@ class PlayerBannedData extends SerializableObjectData
         $this->bannedAt = $bannedAt ?? time();
     }
 
-    final public function getId() : string 
+    final public function getId(bool $encoded = false) : string 
     {
-        return $this->uuid;
+        return $encoded ? base64_encode($this->uuid) : $this->uuid;
     }
 
     public function getUsername() : string 
@@ -69,7 +69,7 @@ class PlayerBannedData extends SerializableObjectData
     protected function serializeObjectdata(): array
     {
         return [
-            self::DATA_UUID => $this->getId(),
+            self::DATA_UUID => $this->getId(true),
             self::DATA_USERNAME => $this->getUsername(),
             self::DATA_BANNED_REASON => $this->getReason(),
             self::DATA_BANNED_BY => $this->getBannedBy(),
@@ -80,7 +80,7 @@ class PlayerBannedData extends SerializableObjectData
     public static function unserialize(array $data): SerializableObjectData
     {
         return new PlayerBannedData(
-            $data[self::DATA_UUID],
+            base64_decode($data[self::DATA_UUID]),
             $data[self::DATA_USERNAME],
             $data[self::DATA_BANNED_REASON],
             $data[self::DATA_BANNED_BY],

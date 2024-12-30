@@ -20,9 +20,9 @@ declare (strict_types=1);
 namespace RajadorDev\ProBan\provider;
 
 use JsonSerializable;
+use pocketmine\utils\Config;
 use pocketmine\promise\Promise;
 use pocketmine\promise\PromiseResolver;
-use pocketmine\utils\Config;
 use RajadorDev\ProBan\data\PlayerBannedData;
 
 class FileProvider implements DataProvider, JsonSerializable

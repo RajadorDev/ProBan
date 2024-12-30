@@ -1,52 +1,12 @@
-#
-#
-# Rajador Developer 🤓
-#
-#
+---
 
-# Enable discord webhook? true = yes, false = not     (If this option is "false" you will not send any webhook to Discord)  🤓👍
-enable-discord: true
+# Default reason when an Administrator kicks/ban someone
+default.reason: 'Without reason'
 
-# Send discord alert when a player is banned?
-ban-webhook: true
-
-# Send discord alert when a player is expelled? 
-kick-webhook: true 
-
-
-# Send a message to everyone online, when a player is banned
-send-ban-message: true
-# Send a message to everyone online, when a player is banned
-send-kick-message: true
-
-# Block local adress? (recomended 🤓👍)
-block-local-adr: true
-
-# Auto block banned ips? (recomended 🤓👍)
-auto-block-adr: true
-
-# default ban/kick reason:
-default-reason: 'No reason'
-
-# Auto save bans.json file? (If it is 'false' it will only save when the server turns off / restart) 🤓👍
-auto-save: true
-
-# Commands Config: {cmd} = the command used 🤓👍
-commands: 
-  ban:
-    permission: 'ban.use' 
-    usage: '§euse: §f/{cmd} <player> <reason>'
-    aliases: [banaccount, punish]
-  banip:
-    permission: 'banip.use'
-    usage: '§euse: §f/{cmd} <ip/player> <reason>'
-    aliases: [ban-ip, banipbyname, banaddress]
-  kick:
-    permission: 'kick.use'
-    usage: '§euse: §f/{cmd} <player> <reason>'
-    aliases: [expel]
-  unban:
-    permission: 'unban.use'
-    usage: '§euse: §f/{cmd} <player/ip>'
-    aliases: []
-    
+# Plugin messages and prefix
+messages:
+  prefix: '§l§bPRO§f§eBAN§r§7  '
+  player.notfound: '{prefix}§cPlayer §f{name} §cnot found!'
+  player.kicked: '{prefix}§cPlayer §f{name} §cwas kicked by §f{by} for: §f{reason}'
+  kicked.screen: '§7You was kicked by §f{by} §7Reason: §f{reason}'
+...
