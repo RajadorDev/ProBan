@@ -13,4 +13,7 @@ permissions:
   proban.ban:
     description: 'Allow players to ban another players.'
     default: op
+  proban.manager:
+    description: 'Allow players to manager proban plugin.'
+    default: op
 ...

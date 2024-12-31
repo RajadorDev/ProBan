@@ -28,6 +28,7 @@ use pocketmine\utils\Config;
 use pocketmine\utils\SingletonTrait;
 use RajadorDev\ProBan\command\BanCommand;
 use RajadorDev\ProBan\command\KickCommand;
+use RajadorDev\ProBan\command\ProBanPluginCommand;
 use RajadorDev\ProBan\data\PlayerBannedData;
 use RajadorDev\ProBan\discord\WebHookManager;
 use RajadorDev\ProBan\provider\DataProvider;
@@ -42,7 +43,7 @@ final class ProBanPlugin extends PluginBase
 
     private Config $uuidsFile;
 
-    private WebHookManager $webhhokManager;
+    private ? WebHookManager $webhhokManager = null;
 
     /** @var array<string, string> */
     private array $uuids = [];
@@ -58,6 +59,7 @@ final class ProBanPlugin extends PluginBase
         $this->initProvider();
         $this->initCommands();
         $this->initUUIDs();
+        $this->initDiscord();
         $this->getServer()->getPluginManager()->registerEvents(new ProBanListener($this), $this);
     }
 
@@ -77,6 +79,7 @@ final class ProBanPlugin extends PluginBase
     {
         new KickCommand('kick', 'Kick players', 'proban.kick', $this->getMessage('kick.usage'));
         new BanCommand('ban', 'Ban players', 'proban.ban', $this->getMessage('ban.usage'));
+        new ProBanPluginCommand('proban', 'ProBan plugin manager', 'proban.manager', "§8---====(§bPro§eBan§8)====---\n§8-\n§8-  §f/{label} webhook <url: string> §7To set up discord WebHook\n§8-  §f/{label} deletehook §7Delete WebHook\n§8-  §f/{label} reload §7Reload plugin config\n§8-");
     }
 
     private function initUUIDs() : void 
@@ -110,9 +113,25 @@ final class ProBanPlugin extends PluginBase
         }
     }
 
+    public function reload() : void 
+    {
+        $this->getConfig()->reload();
+        $this->initDiscord();
+    }
+
     public function getProvider() : DataProvider
     {
         return $this->provider;
+    }
+
+    public function isWebHookEnabled() : bool 
+    {
+        return $this->webhhokManager instanceof WebHookManager;
+    }
+
+    public function getWebHookManager() : ? WebHookManager
+    {
+        return $this->webhhokManager;
     }
 
     public function getConfigValue(string $id, mixed $default = null, bool $warnConsoleIfNotExists = true) : mixed

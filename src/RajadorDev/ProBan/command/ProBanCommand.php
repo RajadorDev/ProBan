@@ -38,7 +38,12 @@ abstract class ProBanCommand extends Command implements PluginOwned
         parent::__construct($commandName, $commandDescription, $usage, $aliases);
         $this->setPermission($permission);
         $this->plugin = ProBanPlugin::getInstance();
-        Server::getInstance()->getCommandMap()->register('proban', $this);
+        $map = Server::getInstance()->getCommandMap();
+        if ($command = $map->getCommand($commandName))
+        {
+            $map->unregister($command);
+        }
+        $map->register('proban', $this);
     }
 
     public function getOwningPlugin(): Plugin

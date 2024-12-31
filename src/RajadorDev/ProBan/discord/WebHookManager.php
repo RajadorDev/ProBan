@@ -20,8 +20,9 @@ declare (strict_types=1);
 
 namespace RajadorDev\ProBan\discord;
 
-use pocketmine\player\Player;
+use pocketmine\Server;
 use RajadorDev\ProBan\ProBanPlugin;
+use RajadorDev\ProBan\task\SendWebhookTask;
 
 final class WebHookManager 
 {
@@ -56,12 +57,30 @@ final class WebHookManager
         return false;
     }
 
-    public function setWebhook(string $webHook, bool $save = true) : void 
+    public static function replaceAll(array $replace, array $to, array &$list) : void 
+    {
+        foreach ($list as &$dataList)
+        {
+            if (is_string($dataList))
+            {
+                $dataList = str_replace($replace, $to, $dataList);
+            } else {
+                self::replaceAll($replace, $to, $dataList);
+            }
+        }
+    }
+
+    public function setWebhook(? string $webHook, bool $save = true) : void 
     {
         $this->webHookUrl = $webHook;
         if ($save)
         {
-            file_put_contents($this->filePath, $webHook);
+            if (is_string($webHook))
+            {
+                file_put_contents($this->filePath, $webHook);
+            } else if (file_exists($this->filePath)) {
+                unlink($this->filePath);
+            }
         }
     }
 
@@ -80,9 +99,30 @@ final class WebHookManager
         return $this->plugin->getConfigValue($type . '-webhook', []);
     }
 
-    public function sendKickWebhook(string $username, string $author, string $reason) : bool 
+    public function sendWebhookByType(string $type, string $username, string $author, string $reason) : bool 
     {
+        if ($this->hasWebhook())
+        {
+            $webhook = $this->getWebhookFormat($type);
+            self::replaceAll([
+                '{name}',
+                '{by}',
+                '{reason}'
+            ], [
+                $username,
+                $author,
+                $reason
+            ], $webhook);
+            $this->sendWebhook($webhook);
+            return true;
+        }
         return false;
+    }
+
+    private function sendWebhook(array $webhook) : void 
+    {
+        $url = $this->getWebhook();
+        Server::getInstance()->getAsyncPool()->submitTask(new SendWebhookTask($url, $webhook));
     }
 
 
