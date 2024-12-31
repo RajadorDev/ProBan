@@ -29,6 +29,7 @@ use pocketmine\utils\SingletonTrait;
 use RajadorDev\ProBan\command\BanCommand;
 use RajadorDev\ProBan\command\KickCommand;
 use RajadorDev\ProBan\data\PlayerBannedData;
+use RajadorDev\ProBan\discord\WebHookManager;
 use RajadorDev\ProBan\provider\DataProvider;
 use RajadorDev\ProBan\provider\FileProvider;
 
@@ -40,6 +41,8 @@ final class ProBanPlugin extends PluginBase
     private DataProvider $provider;
 
     private Config $uuidsFile;
+
+    private WebHookManager $webhhokManager;
 
     /** @var array<string, string> */
     private array $uuids = [];
@@ -95,6 +98,16 @@ final class ProBanPlugin extends PluginBase
         }
         $this->uuidsFile->setAll($list);
         $this->uuidsFile->save();
+    }
+
+    private function initDiscord() : void 
+    {
+        if ($this->getConfig()->get('discord-webhook', true))
+        {
+            $this->webhhokManager = new WebHookManager($this, $this->getDataFolder());
+        } else {
+            $this->webhhokManager = null;
+        }
     }
 
     public function getProvider() : DataProvider

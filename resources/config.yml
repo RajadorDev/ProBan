@@ -3,6 +3,38 @@
 # Default reason when an Administrator kicks/ban someone
 default.reason: 'Without reason'
 
+# If true, will send a embed with the action info (ban/kick)
+discord-webhook: true
+
+# Webhooks that will be sended 
+kick-webhook:
+  content: ''
+  embeds:  
+    title: 'Player Kicked'
+    url: 'https://discord.gg/HkfMbBN2AD'
+    color: 16772379
+    description: "Player **{name}** was kicked by **{by}**"
+    fields:
+      - name: 'Reason'
+        value: '{reason}'
+    footer:
+      text: 'Admin: {by}'
+      icon_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpNXCt-jDVzB_Gjw0QwfLM9iV2xfd3yzUvew&s'
+  
+ban-webhook:
+  content: ''
+  embeds:  
+    title: 'Player Banned'
+    url: 'https://discord.gg/HkfMbBN2AD'
+    color: 16189191
+    description: "Player **{name}** was banned by **{by}**"
+    fields:
+      - name: 'Reason'
+        value: '{reason}'
+    footer:
+      text: 'Admin: {by}'
+      icon_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpNXCt-jDVzB_Gjw0QwfLM9iV2xfd3yzUvew&s'
+
 # Plugin messages and prefix
 messages:
   prefix: '§l§bPRO§f§eBAN§r§7  '
