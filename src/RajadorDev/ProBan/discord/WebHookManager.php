@@ -45,8 +45,7 @@ final class WebHookManager
         if (file_exists($this->filePath))
         {
             $webHook = file_get_contents($this->filePath);
-            $webHookInfo = parse_url($webHook);
-            if (is_array($webHookInfo) && isset($webHookInfo['host']) && $webHookInfo['host'] == 'discord.com')
+            if (self::parseUrl($webHook))
             {
                 $this->setWebhook($webHook, false);
                 return true;
@@ -54,6 +53,12 @@ final class WebHookManager
         }
         $this->webHookUrl = null;
         return false;
+    }
+
+    public static function parseUrl(string $url) : bool 
+    {
+        $webHookInfo = parse_url($url);
+        return (is_array($webHookInfo) && isset($webHookInfo['host']) && $webHookInfo['host'] == 'discord.com');
     }
 
     public static function replaceAll(array $replace, array $to, array &$list) : void 

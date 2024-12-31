@@ -20,6 +20,7 @@ declare (strict_types=1);
 namespace RajadorDev\ProBan\command;
 
 use pocketmine\command\CommandSender;
+use RajadorDev\ProBan\discord\WebHookManager;
 
 class ProBanPluginCommand extends ProBanCommand
 {
@@ -38,7 +39,7 @@ class ProBanPluginCommand extends ProBanCommand
                     if (self::parseArg(1, $args))
                     {
                         $url = $args[0];
-                        if ($this->plugin->getWebHookManager()->setWebhook($url))
+                        if (WebHookManager::parseUrl($url))
                         {
                             $sender->sendMessage($prefix . "Discord WebHook url setted up to §f$url");
                         } else {

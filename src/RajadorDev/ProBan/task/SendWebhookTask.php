@@ -35,7 +35,7 @@ class SendWebhookTask extends AsyncTask
     public function __construct(string $url, array $webHook)
     {
         $this->url = $url;
-        $this->webHook = ThreadSafeArray::fromArray($webHook);
+        $this->webhook = ThreadSafeArray::fromArray($webHook);
     }
 
     public function onRun(): void
