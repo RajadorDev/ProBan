@@ -19,7 +19,7 @@ To configure the webhook for your desired **Discord** channel, simply use:
 
 Where `url` should be the url of your webhook.
 
-You can Edit the messages in the file `config.yml` and use `/pb realod`after
+You can Edit the messages in the file `config.yml` and use `/pb realod`after or restarting after too.
 
 ## Commands:
 
