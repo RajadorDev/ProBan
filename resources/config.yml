@@ -8,41 +8,49 @@ discord-webhook: true
 
 # Webhooks that will be sended 
 kick-webhook:
-  content: ''
+  username: 'ProBan | Kick'
+  avatar_url: 'https://cdn-icons-png.freepik.com/256/10971/10971992.png?semt=ais_hybrid'
   embeds:  
-    title: 'Player Kicked'
-    url: 'https://discord.gg/HkfMbBN2AD'
-    color: 16772379
-    description: "Player **{name}** was kicked by **{by}**"
-    fields:
-      - name: 'Reason'
-        value: '{reason}'
-    footer:
-      text: 'Admin: {by}'
-      icon_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpNXCt-jDVzB_Gjw0QwfLM9iV2xfd3yzUvew&s'
-  
+    - title: 'Player Kicked'
+      url: 'https://discord.gg/HkfMbBN2AD'
+      color: 16772379
+      description: "Player **{name}** was kicked by **{by}**"
+      fields:
+        - name: 'Reason'
+          value: '`{reason}`'
+      footer:
+        text: 'Admin: {by}'
+        icon_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpNXCt-jDVzB_Gjw0QwfLM9iV2xfd3yzUvew&s'
+
 ban-webhook:
-  content: ''
+  username: 'ProBan | Ban'
+  avatar_url: 'https://cdn-icons-png.freepik.com/256/10971/10971992.png?semt=ais_hybrid'
   embeds:  
-    title: 'Player Banned'
-    url: 'https://discord.gg/HkfMbBN2AD'
-    color: 16189191
-    description: "Player **{name}** was banned by **{by}**"
-    fields:
-      - name: 'Reason'
-        value: '{reason}'
-    footer:
-      text: 'Admin: {by}'
-      icon_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpNXCt-jDVzB_Gjw0QwfLM9iV2xfd3yzUvew&s'
+    - title: 'Player Banned'
+      url: 'https://discord.gg/HkfMbBN2AD'
+      color: 16189191
+      description: "Player **{name}** was banned by **{by}**"
+      fields:
+        - name: 'Reason'
+          value: '`{reason}`'
+      footer:
+        text: 'Admin: {by}'
+        icon_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpNXCt-jDVzB_Gjw0QwfLM9iV2xfd3yzUvew&s'
 
 # Plugin messages and prefix
 messages:
   prefix: '§l§bPRO§f§eBAN§r§7  '
   player.notfound: '{prefix}§cPlayer §f{name} §cnot found!'
-  player.kicked: '{prefix}§cPlayer §f{name} §cwas kicked by §f{by} for: §f{reason}'
+  player.kicked: '{prefix}§cPlayer §f{name} §cwas kicked by §f{by} §creason: §f{reason}'
   kick.screen: '§7You was kicked by §f{by} §7Reason: §f{reason}'
   kick.usage: '{prefix}To kick some player use: §f/{label} <player: string> <reason: string>'
   ban.usage: '{prefix}To ban some player: §f/{label} <player: string> <reason: string>'
-  player.banned: '{prefix}§cPlayer §f{name} §cwas banned by §f{by} for: §f{reason}'
+  player.banned: '{prefix}§cPlayer §f{name} §cwas banned by §f{by} §creason: §f{reason}'
   ban.screen: '§7You are banned by §f{by} §7Reason: §f{reason}'
+  ban.notfound: '{prefix}§f{name} §7punishment not found!'
+  deleteban.start: '{prefix}§7Deleting punishment...'
+  banlist.empty: '{prefix}Theres no punishment yet.'
+  delete.ban: '{prefix}Banimento §f{name} §7deletado com §a§lSucesso§r§7!'
+  banlist: '{prefix}Punishment list: §f{list}'
+  unban.usage: '{prefix}To unban some player use: §f/{label} unban <player: string>'
 ...

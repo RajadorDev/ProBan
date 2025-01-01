@@ -27,8 +27,10 @@ use pocketmine\Server;
 use pocketmine\utils\Config;
 use pocketmine\utils\SingletonTrait;
 use RajadorDev\ProBan\command\BanCommand;
+use RajadorDev\ProBan\command\BanList;
 use RajadorDev\ProBan\command\KickCommand;
 use RajadorDev\ProBan\command\ProBanPluginCommand;
+use RajadorDev\ProBan\command\UnbanCommand;
 use RajadorDev\ProBan\data\PlayerBannedData;
 use RajadorDev\ProBan\discord\WebHookManager;
 use RajadorDev\ProBan\provider\DataProvider;
@@ -72,14 +74,16 @@ final class ProBanPlugin extends PluginBase
     {
         $dir = $this->getDataFolder();
         $file = new Config($dir . 'bans.json', Config::JSON);
-        $this->provider = new FileProvider($file, FileProvider::unserializeList($file->getAll()));
+        $this->setProvider(new FileProvider($file, FileProvider::unserializeList($file->getAll())));
     }
 
     private function initCommands() : void 
     {
         new KickCommand('kick', 'Kick players', 'proban.kick', $this->getMessage('kick.usage'));
         new BanCommand('ban', 'Ban players', 'proban.ban', $this->getMessage('ban.usage'));
-        new ProBanPluginCommand('proban', 'ProBan plugin manager', 'proban.manager', "§8---====(§bPro§eBan§8)====---\n§8-\n§8-  §f/{label} webhook <url: string> §7To set up discord WebHook\n§8-  §f/{label} deletehook §7Delete WebHook\n§8-  §f/{label} reload §7Reload plugin config\n§8-");
+        new ProBanPluginCommand('proban', 'ProBan plugin manager', 'proban.manager', "§8---====(§bPro§eBan§8)====---\n§8-\n§8-  §f/{label} webhook <url: string> §7To set up discord WebHook\n§8-  §f/{label} deletehook §7Delete WebHook\n§8-  §f/{label} reload §7Reload plugin config\n§8-  §f/{label} info §7Shows info about the plugin", ['pb']);
+        new UnbanCommand('unban', 'Remove punishment', 'proban.unban', $this->getMessage('unban.usage'));
+        new BanList('banlist', 'Show the list of punishments', 'proban.list');
     }
 
     private function initUUIDs() : void 
@@ -111,6 +115,11 @@ final class ProBanPlugin extends PluginBase
         } else {
             $this->webhhokManager = null;
         }
+    }
+
+    public function setProvider(DataProvider $provider) : void 
+    {
+        $this->provider = $provider;
     }
 
     public function reload() : void 
@@ -152,7 +161,7 @@ final class ProBanPlugin extends PluginBase
 
     public function getPrefix() : string 
     {
-        return $this->getMessage('prefix', default: '§l§bPRO§f§eBAN§r§7  ');
+        return $this->getMessage('prefix', default: '§l§bPRO§f§eBAN§r§7  ', addPrefix: false);
     }
 
     public function getMessage(string $messageId, string | array $replace = null, string | array $to = null, string $default = '{prefix}Message not found!', bool $warnConsoleIfNotExists = true, bool $addPrefix = true) : string 
@@ -188,6 +197,10 @@ final class ProBanPlugin extends PluginBase
         Server::getInstance()->broadcastMessage($serverMessage);
         $screenMessage = $this->getMessage('kick.screen', ['{by}', '{reason}'], [$author->getName(), $reason]);
         $player->kick(disconnectScreenMessage: $screenMessage);
+        if ($this->isWebHookEnabled())
+        {
+            $this->getWebHookManager()->sendWebhookByType(WebHookManager::KICK, $player->getName(), $author->getName(), $reason);
+        }
     }
 
     public function ban(string $uuid, string $username, CommandSender $author, string $reason) : Promise 
@@ -204,6 +217,10 @@ final class ProBanPlugin extends PluginBase
                     {
                         $screenMessage = $this->getMessage('ban.screen', ['{by}', '{reason}'], [$authorUsername, $reason]);
                         $target->kick(disconnectScreenMessage: $screenMessage);
+                    }
+                    if ($this->isWebHookEnabled())
+                    {
+                        $this->getWebHookManager()->sendWebhookByType(WebHookManager::BAN, $username, $authorUsername, $reason);
                     }
                 }
             },

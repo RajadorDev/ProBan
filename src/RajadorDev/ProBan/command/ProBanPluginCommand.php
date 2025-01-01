@@ -38,9 +38,10 @@ class ProBanPluginCommand extends ProBanCommand
                 {
                     if (self::parseArg(1, $args))
                     {
-                        $url = $args[0];
+                        $url = $args[1];
                         if (WebHookManager::parseUrl($url))
                         {
+                            $this->plugin->getWebHookManager()->setWebhook($url);
                             $sender->sendMessage($prefix . "Discord WebHook url setted up to §f$url");
                         } else {
                             $sender->sendMessage("{$prefix}§cInvalid WebHook url!");
@@ -67,6 +68,12 @@ class ProBanPluginCommand extends ProBanCommand
                 $prefix = $this->plugin->getPrefix();
                 $this->plugin->reload();
                 $sender->sendMessage($prefix . 'Plugin reloaded §l§aSuceffully§r§7!');
+            break;
+            case 'info':
+                $version = $this->plugin->getDescription()->getVersion();
+                $sender->sendMessage(
+                    "§8---====(§bPro§eBan§8)====---\n§8-\n§8-§7  Author: §fRajadorDev\n§8-  §7Discord: §9rajadortv\n§8-  §7Version: §f$version\n§8-\n§8-  §7Repository: §fhttps://github.com/RajadorDev/ProBan/tree/development/src/RajadorDev/ProBan\n§8-"
+                );
             break;
             default:
                 $sender->sendMessage($this->plugin->getPrefix() . "Invalid Sub-command §f\"§c{$firstArgument}§f\" §7use: §f/$label help §7for list of sub-commands");

@@ -36,7 +36,7 @@ class PlayerBannedData extends SerializableObjectData
 
     protected int $bannedAt;
 
-    public function __construct(private string $uuid, protected string $username, protected string $reason, protected string $bannedBy, ? string $bannedAt = null)
+    public function __construct(private string $uuid, protected string $username, protected string $reason, protected string $bannedBy, ? int $bannedAt = null)
     {
         $this->bannedAt = $bannedAt ?? time();
     }

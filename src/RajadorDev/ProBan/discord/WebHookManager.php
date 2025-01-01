@@ -68,7 +68,7 @@ final class WebHookManager
             if (is_string($dataList))
             {
                 $dataList = str_replace($replace, $to, $dataList);
-            } else {
+            } else if (is_array($dataList)) {
                 self::replaceAll($replace, $to, $dataList);
             }
         }

@@ -2,7 +2,7 @@
 name: ProBan
 api: 5.0.0
 main: RajadorDev\ProBan\ProBanPlugin
-version: 2.0.0 
+version: 2.0.0 Pre-Release
 author: Rajador
 website: https://github.com/RajadorDev
 discord: rajadortv
@@ -15,5 +15,11 @@ permissions:
     default: op
   proban.manager:
     description: 'Allow players to manager proban plugin.'
+    default: op
+  proban.unban:
+    description: 'Allow players to remove some punishment.'
+    default: op
+  proban.list:
+    description: 'Allow players to see bans list.'
     default: op
 ...
