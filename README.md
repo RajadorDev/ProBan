@@ -1,7 +1,7 @@
 # ProBan Plugin 
 
 <p align="center">
-  <img src="./img/icon.png">
+  <img src="./img/balance.png">
 </p>
 
 ## About:
