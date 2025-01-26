@@ -1,7 +1,7 @@
 # ProBan Plugin 
 
 <p align="center">
-  <img src="/img/balance.png">
+  <img src="https://raw.githubusercontent.com/RajadorDev/ProBan/c1fe4f9bc6a26a530a213abdb6ca85ef8479def5/img/balance.png">
 </p>
 
 ## About:
