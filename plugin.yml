@@ -2,7 +2,7 @@
 name: ProBan
 api: 5.0.0
 main: RajadorDev\ProBan\ProBanPlugin
-version: 2.0.0 Pre-Release
+version: 2.0.0
 author: Rajador
 website: https://github.com/RajadorDev
 discord: rajadortv
